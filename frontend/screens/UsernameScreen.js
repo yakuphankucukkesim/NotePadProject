@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, Alert } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
-
 import { AntDesign } from '@expo/vector-icons';
 
 function UsernameScreen() {

@@ -1,22 +1,35 @@
 import { useState } from "react";
 import { TextInput, View, StyleSheet, Alert, Text, TouchableOpacity } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import SelectDropdown from "react-native-select-dropdown";
+import axios from "axios";
 
 function AddNoteScreen() {
     const [noteTitle, setChangeTitle] = useState('');
     const [noteText, setChangeText] = useState('');
+    const [noteCategory, setChangeCategory] = useState('');
+
     const categories = ["Business", "Education", "Personal", "Shopping"];
 
     const navigation = useNavigation();
 
-    const saveNote = () => {
-        setChangeTitle((title) => setChangeTitle(title));
-        setChangeText((text) => setChangeText(text));
-        console.log({ noteTitle })
-        console.log({ noteText })
+    const saveNote = async () => {
+        try {
+            const response = await axios.post('http://10.0.2.2:5000/api/notes', {
+                title: noteTitle,
+                text: noteText,
+                category: noteCategory
+            });
+
+            setChangeTitle('');
+            setChangeText('');
+            setChangeCategory('');
+
+        } catch (error) {
+            console.error('Error saving note:', error);
+            Alert.alert('Error', 'An error occurred while saving the note');
+        }
     }
 
     const deleteData = () => {
@@ -34,8 +47,6 @@ function AddNoteScreen() {
             Alert.alert('Error!', 'Title and text must be filled!')
         } else {
             saveNote();
-
-
             Alert.alert('Successful',
                 'Your note is saved! What would you like to do?', [
                 {
@@ -50,7 +61,7 @@ function AddNoteScreen() {
                 },
                 {
                     text: 'Add another note',
-                    onPress: () => navigation.navigate('AddNote', setChangeText(''), setChangeTitle('')),
+                    onPress: () => navigation.navigate('AddNote'),
                     style: 'cancel'
                 },
             ])
@@ -102,6 +113,7 @@ function AddNoteScreen() {
                     data={categories}
                     onSelect={(selectedCategory, index) => {
                         console.log(selectedCategory, index);
+                        setChangeCategory(selectedCategory);
                     }}
                     defaultButtonText={'Select category'}
                     buttonTextAfterSelection={(selectedCategory, index) => {

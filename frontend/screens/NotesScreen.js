@@ -1,9 +1,7 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import { useEffect, useState } from "react";
-
 import { useNavigation } from "@react-navigation/native";
-
 import DisplayItem from "../components/DisplayItem";
 
 function NotesScreen() {
@@ -69,24 +67,13 @@ function NotesScreen() {
                                 <Text
                                     style={[
                                         styles.categoryButtonText,
-                                        selectedCategory === category && styles.selectedCategoryButtonText
+                                        selectedCategory === category && styles.selectedCategoryButtonText,
                                     ]}>
                                     {category}
                                 </Text>
                             </TouchableOpacity>
                         ))}
                     </View>
-                    {/* <View style={styles.notes}>
-                        {dummyData && dummyData.map((item) => {
-                            return (
-                                <DisplayItem
-                                    key={item.id}
-                                    title={item.title}
-                                    text={item.text}
-                                />
-                            );
-                        })}
-                    </View> */}
                     <FlatList
                         style={styles.notes}
                         data={filteredData}

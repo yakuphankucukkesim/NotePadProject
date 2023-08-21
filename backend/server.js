@@ -7,9 +7,11 @@ dotenv.config()
 
 const port = process.env.PORT || 5001
 const app = express();
+
 app.use(cors({
     origin: '*'
 }));
+
 const connectDb = async () => {
     try {
         const conn = await mongoose.connect(process.env.MONGO_CONNECT);

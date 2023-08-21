@@ -1,10 +1,6 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-
-import { useNavigation } from "@react-navigation/native";
-
-import { useRoute } from '@react-navigation/native';
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 function Home() {
     const route = useRoute()

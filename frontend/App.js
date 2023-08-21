@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-
 import { NavigationContainer } from './node_modules/@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import HomeScreen from './screens/HomeScreen';
 import AddNoteScreen from './screens/AddNoteScreen';
 import NotesScreen from './screens/NotesScreen';
 import UsernameScreen from './screens/UsernameScreen';
+import FullNoteScreen from './screens/FullNoteScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +35,10 @@ export default function App() {
           <Stack.Screen
             name='DisplayNotes'
             component={NotesScreen}
+          />
+          <Stack.Screen 
+          name='FullNoteScreen'
+          component={FullNoteScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
