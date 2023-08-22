@@ -31,3 +31,19 @@ export const addNote = async (req, res) => {
         res.status(500).json({ message: 'Error adding note' });
     }
 }
+
+export const deleteNote = async (req, res) => {
+    const noteId = req.params.id;
+
+    try {
+        const deletedNote = await Note.findByIdAndDelete(noteId);
+        if (deletedNote) {
+            res.status(200).json({ message: 'Note deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Note not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting note', error);
+        res.status(500).json({ message: 'Error deleting note' });
+    }
+}

@@ -36,9 +36,9 @@ export default function App() {
             name='DisplayNotes'
             component={NotesScreen}
           />
-          <Stack.Screen 
-          name='FullNoteScreen'
-          component={FullNoteScreen}
+          <Stack.Screen
+            name='FullNoteScreen'
+            component={FullNoteScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
