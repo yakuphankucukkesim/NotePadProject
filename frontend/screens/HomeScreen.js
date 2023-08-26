@@ -1,6 +1,7 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import StyleableButton from "../components/StyleableButton";
 
 function Home() {
     const route = useRoute()
@@ -13,7 +14,16 @@ function Home() {
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                 >
-                    <AntDesign name="leftcircle" size={40} color="black" />
+                    <Ionicons
+                        name="arrow-back"
+                        size={40}
+                        color="black"
+                        style={{
+                            shadowOpacity: 2,
+                            textShadowRadius: 2,
+                            textShadowOffset: { width: 2, height: 2 },
+                        }}
+                    />
                 </TouchableOpacity>
                 <Text style={styles.backText}>Back</Text>
             </View>
@@ -21,26 +31,20 @@ function Home() {
                 <Text style={styles.welcomeText}>Welcome, {user}</Text>
             </View>
             <View>
-                <Text style={styles.textStyle}>Create notes about any categories</Text>
+                <Text style={styles.textStyle}>Create notes about work, education, shopping and personal categories</Text>
             </View>
             <View style={styles.textContainer}>
-                <Text style={styles.smallTextStyle}>Just need to select a category</Text>
+                <Text style={styles.smallTextStyle}>What would you like to do?</Text>
             </View>
-            <View style={styles.skipButton}>
-                <TouchableOpacity
+            <View style={styles.buttonView}>
+                <StyleableButton
+                    title="Skip to my notes >>"
                     onPress={() => navigation.navigate('DisplayNotes')}
-                >
-                    <Text style={styles.skipText}>Skip to my notes</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                />
+                <StyleableButton
+                    title="Add note +"
                     onPress={() => navigation.navigate('AddNote')}
-                >
-                    <MaterialIcons
-                        name="note-add"
-                        size={60}
-                        color="black"
-                    />
-                </TouchableOpacity>
+                />
             </View>
         </View >
     );
@@ -51,7 +55,11 @@ export default Home;
 const styles = StyleSheet.create({
     backButton: {
         flexDirection: 'row',
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        borderTopLeftRadius: 6,
+        borderBottomRightRadius: 6,
+        borderColor: '#ccc',
+        alignItems: 'center',
     },
     backText: {
         margin: 10,
@@ -83,19 +91,21 @@ const styles = StyleSheet.create({
         fontFamily: 'serif'
     },
     smallTextStyle: {
-        fontSize: 17,
+        fontSize: 20,
         justifyContent: 'center',
         fontFamily: 'sans-serif-light'
     },
-    skipButton: {
-        padding: 10,
+    buttonView: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         alignItems: 'center'
     },
-    skipText: {
-        color: 'blue',
-        fontSize: 16,
-        fontFamily: 'serif'
+    addNoteButton: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    addNoteTextView: {
+        fontFamily: 'serif',
+        fontSize: 15
     }
 })

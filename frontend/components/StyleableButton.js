@@ -1,10 +1,10 @@
-import { Text, StyleSheet, TouchableHighlight } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
 function StyleableButton({ title, onPress }) {
     return (
-        <TouchableHighlight style={styles.button} onPress={onPress}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.buttonText}>{title}</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
 }
 
@@ -22,11 +22,12 @@ const styles = StyleSheet.create({
         margin: 10,
         shadowColor: '#000',
         shadowRadius: 5,
-        elevation: 3
+        elevation: 3,
     },
     buttonText: {
         color: 'black',
-        fontSize: 16,
-        fontWeight: 'normal'
+        fontSize: 16.5,
+        fontWeight: 'normal',
+        fontFamily: 'serif'
     }
 })

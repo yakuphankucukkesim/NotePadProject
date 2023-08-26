@@ -6,11 +6,11 @@ import AddNoteScreen from './screens/AddNoteScreen';
 import NotesScreen from './screens/NotesScreen';
 import UsernameScreen from './screens/UsernameScreen';
 import FullNoteScreen from './screens/FullNoteScreen';
+import EditNoteScreen from './screens/EditNoteScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
   return (
     <>
       <StatusBar style='dark' />
@@ -39,6 +39,10 @@ export default function App() {
           <Stack.Screen
             name='FullNoteScreen'
             component={FullNoteScreen}
+          />
+          <Stack.Screen
+            name='EditNote'
+            component={EditNoteScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -4,13 +4,12 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
 
 function UsernameScreen() {
+    const navigation = useNavigation();
     const [user, setUsername] = useState('');
 
     const onChangeTextHandler = text => {
         setUsername(text);
     }
-
-    const navigation = useNavigation();
 
     const usernameInputFunction = () => {
         if (user === '') {
@@ -48,6 +47,11 @@ function UsernameScreen() {
                         name="rightcircle"
                         size={80}
                         color="black"
+                        style={{
+                            shadowOpacity: 2,
+                            textShadowRadius: 2,
+                            textShadowOffset: { width: 2, height: 2 },
+                        }}
                     />
                 </TouchableOpacity>
             </View>
@@ -75,17 +79,32 @@ const styles = StyleSheet.create({
     textContainer: {
         fontSize: 25,
         fontWeight: '500',
-        fontFamily: 'serif'
+        fontFamily: 'serif',
+        margin: 20
     },
     usernameInput: {
         padding: 12,
         margin: 30,
         borderWidth: 2,
-        borderColor: '#e8e8e8',
         borderRadius: 8,
         width: 370,
         height: 50,
         fontSize: 17,
-        backgroundColor: '#e8e8e8'
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        margin: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderColor: '#ccc',
+        shadowColor: '#000',
+        shadowRadius: 5,
+        elevation: 3,
+        marginBottom: 50
     },
+    iconStyle: {
+        shadowColor: '#000',
+        shadowRadius: 5,
+        elevation: 3,
+    }
 })

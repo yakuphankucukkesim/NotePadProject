@@ -1,13 +1,12 @@
 import { View, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 function FullNoteScreen({ route }) {
     const { note } = route.params;
-
     const navigation = useNavigation();
 
-    const handleDeleteNote = async () => {
+    const deleteNote = async () => {
         Alert.alert(
             'Delete Note',
             'Are you sure you want to delete this note?',
@@ -26,7 +25,7 @@ function FullNoteScreen({ route }) {
 
                             if (response.ok) {
                                 Alert.alert('Note Deleted', 'The note has been deleted successfully.');
-                                navigation.goBack();
+                                navigation.navigate('DisplayNotes');
                             } else {
                                 console.error('Failed to delete note');
                             }
@@ -48,29 +47,64 @@ function FullNoteScreen({ route }) {
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
                     >
-                        <AntDesign
-                            name="leftcircle"
+                        <Ionicons
+                            name="arrow-back"
                             size={40}
                             color="black"
+                            style={{
+                                shadowOpacity: 2,
+                                textShadowRadius: 2,
+                                textShadowOffset: { width: 2, height: 2 },
+                            }}
                         />
                     </TouchableOpacity>
                     <Text style={styles.backText}>Back</Text>
                 </View>
             </View>
-            <View style={styles.textView}>
-                <Text style={styles.titleContainer}>{note.title}</Text>
-                <Text style={styles.textContainer}>{note.text}</Text>
+            <View style={styles.noteView}>
+                <Text style={styles.timeStamp}>{
+                    new Date(note.createdAt)
+                        .toLocaleDateString(undefined,
+                            { year: "numeric", month: "long", day: "numeric", })}
+                </Text>
+                <Text style={styles.titleView}>{note.title}</Text>
+                <Text style={styles.textView}>{note.text}</Text>
             </View>
-            <View style={styles.deleteButton}>
-                <TouchableOpacity
-                    onPress={handleDeleteNote}
-                >
-                    <AntDesign
-                        name="delete"
-                        size={50}
-                        color="black"
-                    />
-                </TouchableOpacity>
+            <View style={styles.buttons}>
+                <View style={styles.deleteButtonView}>
+                    <TouchableOpacity
+                        onPress={deleteNote}
+                    >
+                        <AntDesign
+                            name="delete"
+                            size={50}
+                            color="black"
+                            style={{
+                                shadowOpacity: 2,
+                                textShadowRadius: 2,
+                                textShadowOffset: { width: 2, height: 2 },
+                            }}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.deleteText}>Delete</Text>
+                </View>
+                <View style={styles.editButtonView}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('EditNote', { note })}
+                    >
+                        <AntDesign
+                            name="edit"
+                            size={50}
+                            color="black"
+                            style={{
+                                shadowOpacity: 2,
+                                textShadowRadius: 2,
+                                textShadowOffset: { width: 2, height: 2 },
+                            }}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.editText}>Edit</Text>
+                </View>
             </View>
         </View>
     );
@@ -79,11 +113,13 @@ function FullNoteScreen({ route }) {
 export default FullNoteScreen;
 
 const styles = StyleSheet.create({
-    textView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        bottom: 150
+    page: {
+        flex: 1
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        top: 90
     },
     backButton: {
         flexDirection: 'row',
@@ -95,27 +131,48 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontFamily: 'serif'
     },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        top: 90
-    },
-    page: {
+    noteView: {
         flex: 1,
-        flexDirection: 'column'
+        justifyContent: 'center',
+        alignItems: 'center',
+        bottom: 150
     },
-    titleContainer: {
+    titleView: {
         fontWeight: 'bold',
         fontFamily: 'serif',
         fontSize: 33,
         margin: 50
     },
-    textContainer: {
+    textView: {
         fontFamily: 'serif',
-        fontSize: 30,
-
+        fontSize: 30
     },
-    deleteButton: {
-        margin: 50
+    buttons: {
+        margin: 50,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    deleteButtonView: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    deleteText: {
+        fontSize: 15,
+        fontFamily: 'serif',
+    },
+    editButtonView: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    editText: {
+        fontSize: 15,
+        fontFamily: 'serif'
+    },
+    timeStamp: {
+        fontSize: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })

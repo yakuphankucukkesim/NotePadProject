@@ -2,6 +2,7 @@ import express, { urlencoded } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import notesRoutes from "./routes/noteRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 import cors from 'cors';
 dotenv.config()
 
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/api/notes", notesRoutes);
+app.use("/api/categories", categoryRoutes);
 
 app.listen(port, (() => {
     connectDb();
